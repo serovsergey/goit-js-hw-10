@@ -38,3 +38,11 @@ ul {
   display: flex;
   align-items: center;
 }
+
+.country__item {
+  cursor: pointer;
+}
+
+.country__item--selected {
+  background-color: #ccc;
+}

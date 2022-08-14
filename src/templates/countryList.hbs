@@ -1,3 +1,10 @@
   {{#each this}}
-    <li class="display-flex country__item"><img class="country__logo" src="{{flags.svg}}">{{name.official}}</li>
+    <li class="display-flex country__item" data-name="{{name.official}}"><img class="country__logo" src="{{flags.svg}}">
+    {{#if nameParts}}
+      <span>{{nameParts.begin}}<span class="country__item--selected">{{nameParts.searchString}}</span>{{nameParts.end}}</span>
+    {{/if}}
+    {{#unless nameParts}}
+      {{name.official}}
+    {{/unless}}
+    </li>
   {{/each}}
