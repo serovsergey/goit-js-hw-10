@@ -49,7 +49,7 @@ refs.input.addEventListener('input', debounce(evt => {
       }
     })
     .catch((err) => {
-      console.log(err)
+      // console.log(err);
       Notiflix.Notify.failure("Oops, there is no country with that name");
     })
 }, DEBOUNCE_DELAY));
