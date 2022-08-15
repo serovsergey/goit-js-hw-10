@@ -19,30 +19,23 @@ refs.list.addEventListener('click', (evt) => {
   refs.input.dispatchEvent(new Event('input'));
 })
 
-const getFirstOccurrence = (obj, str, path = '', c = 0) => {
+const getFirstOccurrence = (obj, str, path = '') => {
   if (typeof obj === 'string') {
     if (obj.toLowerCase().includes(str))
-      return path + '=' + obj;
+      return path + '="' + obj + '"';
   }
   else if (Array.isArray(obj)) {
-    let res = '';
-    obj.forEach((el, idx) => {
-      const inner = getFirstOccurrence(el, str, path + '[' + idx + ']', c + 1);
-      if (inner) {
-        res = inner;
+    for (let i = 0; i < obj.length; i++) {
+      const inner = getFirstOccurrence(obj[i], str, path + '[' + i + ']');
+      if (inner)
         return inner;
-      }
-    })
-    if (res) return res;
+    }
   }
   else if (typeof obj === 'object' && obj !== null) {
     for (let f in obj) {
-      // console.log('object', f, obj[f]);
-      const val = obj[f];
-      const inner = getFirstOccurrence(val, str, path + '.' + f, c + 1);
-      if (inner) {
+      const inner = getFirstOccurrence(obj[f], str, path + '.' + f);
+      if (inner)
         return inner;
-      }
     }
   }
   return '';
